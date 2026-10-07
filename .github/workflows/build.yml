@@ -15,10 +15,18 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 9.5.1
-      - run: gradle build
+      - name: Projektordner finden
+        id: find
+        run: |
+          DIR=$(dirname "$(find . -name settings.gradle -not -path './.git/*' | head -n 1)")
+          echo "Projektordner: $DIR"
+          echo "dir=$DIR" >> "$GITHUB_OUTPUT"
+      - name: Build
+        working-directory: ${{ steps.find.outputs.dir }}
+        run: gradle build
       - uses: actions/upload-artifact@v4
         with:
           name: hugo-macro-jar
           path: |
-            build/libs/*.jar
-            !build/libs/*-sources.jar
+            ${{ steps.find.outputs.dir }}/build/libs/*.jar
+            !${{ steps.find.outputs.dir }}/build/libs/*-sources.jar
