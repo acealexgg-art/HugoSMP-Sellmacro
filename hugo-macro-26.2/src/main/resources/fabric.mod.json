@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "hugomacro",
+  "version": "${version}",
+  "name": "Hugo Macro",
+  "description": "Sell- und Spawner-Macro fuer HugoSMP mit Settings-Menue.",
+  "authors": ["Du"],
+  "license": "MIT",
+  "icon": "assets/hugomacro/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["de.hugosmp.macro.HugoMacroClient"],
+    "modmenu": ["de.hugosmp.macro.HugoMacroModMenu"]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
